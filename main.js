@@ -18,4 +18,3 @@ Mario.save().then(() => {console.log("saves");});
 Persona.find({nombre:"Mario"}).then((Persona)=>{console.log(Persona)})
 
 
-"hola"
