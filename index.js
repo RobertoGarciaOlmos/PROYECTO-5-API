@@ -1,38 +1,49 @@
-require('dotenv').config();
-
 
 /** 
- * 1. Importar express
- * 2. Crear modelos
- * 3.Crear controlador
- * 4. Crear rutas
- * 5.Hacer instancia de la aplicacion
- * 6.Midelware
- * 7.Importar rutas
+ * 1. Importar variables de entorno,
+ * 2. Crear modelos / importar -> "carpeta models"
+ * 3. Importar express, mongoose y Router
+ * 4. Hacer instancia de la aplicacion
+ * 5. Midelware
+ * 6. Conectar mongoose
+ * 7. Definar rutas
  * 8.Iniciar servidor
  */ 
 
+ // 1. 
+require('dotenv').config();
 
+//2
+require ('./models')
 
-
- // 1. Importar Express
+//3
 const express= require ('express');
+const mongoose= require ('mongoose');
+const routes = require('./routes');
 
-
-// 5. Inicializar la función de Express
+// 4
 const app = express();
 
-// 6. Agregar los middleware
+// 5
 app.use(express.json());
 
-// 7. Declarar rutas
-app.get('/',(req,res)=>{
-    res.json({mensaje:'Bienvenidos'});
-});
+
+
+// 6
+
+mongoose.connect(process.env.URI_MONGO_SERVER);
+
+//7
+
+app.use("/v1",routes);
+
+app.use((req,res)=>
+res.send (`<a href="/v1"> Go to API!</a>`));
+
 
 
 // 8. Iniciar servidor
 
 app.listen(process.env.PORT, ()=>{
     console.log(`conectado a puerto: ${process.env.PORT}`)
-})
+});

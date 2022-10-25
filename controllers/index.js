@@ -1,7 +1,9 @@
-const controller= require('./User.controller');
+const {registro, verUsuario, filtrarUsuarios,eliminarUsuario }= require('./User.controller');
 
 module.exports={
   registro,
-  verUsuario
+  verUsuario,
+  filtrarUsuarios,
+  eliminarUsuario,
 
 }

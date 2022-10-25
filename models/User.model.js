@@ -8,12 +8,11 @@
 
 
 //! 1
-const mongoose = require ('mongoose')
+const mongoose = require ('mongoose');
 
 
 //! 2
 const UserSchema= new mongoose.Schema({
-
     nombre:{
         type: String,
         require: true,
@@ -23,8 +22,9 @@ const UserSchema= new mongoose.Schema({
         default:'Tierra'
     },
     edad:{
+        type:Number,
 min: [18, `Tienes que ser mayor de edad`],
-max:[100, `Ya estas muy viejo`],
+max: [100, `Ya estas muy viejo`]
     },
     tipo: {
         type: String,
