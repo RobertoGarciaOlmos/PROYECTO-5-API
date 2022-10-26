@@ -60,6 +60,19 @@ catch(e){return res.status(400).json({mensaje: "Error", datalles: e.message});
 };
 
 
+const actualizarUsuario = async (req,res) => {
+    try{
+const {id} =req.params;
+const actualizado =await User.findByIdAndUpdate(id, {$set: req.body},{new:true});
+return res.status(200).json({mensaje: "Atualizado", datalles: actualizado})
+
+}catch(e){
+
+    return res.status(404).json({mensaje: "Error", datalles: e.message})
+}
+
+}
+
 
 
 module.exports={
@@ -67,5 +80,6 @@ module.exports={
     verUsuario,
 filtrarUsuarios,
 eliminarUsuario,
+actualizarUsuario 
 
     };

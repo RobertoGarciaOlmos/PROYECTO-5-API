@@ -19,7 +19,8 @@ const {
     registro,
     verUsuario,
     filtrarUsuarios,
-    eliminarUsuario
+    eliminarUsuario,
+    actualizarUsuario 
 } = require('../controllers');
 
 //4
@@ -28,6 +29,7 @@ router.post('/',registro);
 router.get('/getAll',verUsuario);
 router.get('/filtrar',filtrarUsuarios);
 router.delete('/:id',eliminarUsuario);
+router.put('/:id', actualizarUsuario);
 
 
 //5
