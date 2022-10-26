@@ -1,6 +1,7 @@
 const express= require ('express');
 const router = express.Router();
 const userRouter = require ("./User.route");
+const cupcakeRouter = require ("./Cupcake.route")
 
 router.get('/',(req,res)=>{
     res.send(
@@ -9,5 +10,6 @@ router.get('/',(req,res)=>{
 });
 
 router.use('/user',userRouter)
+router.use('/cupcake',cupcakeRouter)
 
 module.exports = router;
