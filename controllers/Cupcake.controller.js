@@ -31,17 +31,17 @@ catch(e){return res.status(400).json({mensaje: "Error", datalles: e.message});
 
 }
 
-const filtrarCupcakes= async (req, res)=>
-{ try{
-    const Cupcakes= await  Cupcake.find(req.body);
-if(!Cupcakes.length) 
-return res.status(404).json({mensaje: "Error", datalles: 'No se encontro Cupcake / Producto'})
-return res.status(200).json({mensaje: "Cupcakes encontrados / Producto", datalles: usuarios})
-}
-catch(e){return res.status(400).json({mensaje: "Error", datalles: e.message});
-}
+// const filtrarCupcakes= async (req, res)=>
+// { try{
+//     const Cupcakes= await  Cupcake.find(req.body);
+// if(!Cupcakes.length) 
+// return res.status(404).json({mensaje: "Error", datalles: 'No se encontro Cupcake / Producto'})
+// return res.status(200).json({mensaje: "Cupcakes encontrados / Producto", datalles: usuarios})
+// }
+// catch(e){return res.status(400).json({mensaje: "Error", datalles: e.message});
+// }
 
-}
+// }
 
 
 const eliminarCupcake= async (req, res)=>
@@ -78,7 +78,6 @@ return res.status(200).json({mensaje: "Atualizado", datalles: actualizado})
 module.exports={
     newCupcake,
     verCupcake,
-    filtrarCupcakes,
     eliminarCupcake,
     actualizarCupcake
     };

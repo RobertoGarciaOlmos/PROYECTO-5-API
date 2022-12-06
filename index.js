@@ -19,10 +19,18 @@ require ('./models')
 //3
 const express= require ('express');
 const mongoose= require ('mongoose');
+const cors = require ("cors");
 const routes = require('./routes');
+
+
+
 
 // 4
 const app = express();
+
+//cors
+
+app.use(cors());
 
 // 5
 app.use(express.json());
@@ -38,7 +46,7 @@ mongoose.connect(process.env.URI_MONGO_SERVER);
 app.use("/v1",routes);
 
 app.use((req,res)=>
-res.send (`<a href="/v1"> Go to API!</a>`));
+res.send (`<a href="/v1"> Go to API </a>`));
 
 
 

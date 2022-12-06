@@ -18,7 +18,6 @@ const router = express.Router();
 const {
     newCupcake,
     verCupcake,
-    filtrarCupcakes,
     eliminarCupcake,
     actualizarCupcake
 } = require('../controllers');
@@ -27,7 +26,6 @@ const {
 
 router.post('/',newCupcake);
 router.get('/getAll',verCupcake);
-router.get('/filtrar',filtrarCupcakes);
 router.delete('/:id',eliminarCupcake);
 router.put('/:id', actualizarCupcake);
 

@@ -1,7 +1,7 @@
 
 
 /**
- * 1-importar mongoose
+ * 1-importar mongoose y crypto
  * 2. Crear el esquema 
  * 3. Exportar models
  */
@@ -9,6 +9,7 @@
 
 //! 1
 const mongoose = require ('mongoose');
+const crypto = require("crypto");
 
 
 //! 2
@@ -35,10 +36,25 @@ max: [100, `Ya estas muy viejo`]
             'limpieza'
         ],
         default:'cliente'
+    },
+    password:{
+        type: String,
+    },
+    salt: {
+        type: String,
     }
+    
+
+
 })
 
+
 //! 3
+
+UserSchema.methods.hashPassword = function(password) {
+    this.salt=crypto.randomBytes(16).toString("hex");
+    this.password = crypto.pbkdf2Sync(password, this.salt,1000,251,'sha512').toString('hex')
+};
 
 
 mongoose.model('User',UserSchema, 'coleccionUser');

@@ -1,5 +1,5 @@
 const {registro, verUsuario, filtrarUsuarios,eliminarUsuario, actualizarUsuario }= require('./User.controller');
-const {newCupcake, verCupcake, filtrarCupcakes, eliminarCupcake,actualizarCupcake }= require('./Cupcake.controller');
+const {newCupcake, verCupcake, eliminarCupcake,actualizarCupcake }= require('./Cupcake.controller');
 
 
 module.exports={
@@ -10,7 +10,6 @@ module.exports={
   actualizarUsuario,
   newCupcake,
   verCupcake,
-  filtrarCupcakes,
   eliminarCupcake,
   actualizarCupcake
 }

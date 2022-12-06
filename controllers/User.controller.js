@@ -1,4 +1,3 @@
-const { Collection } = require('mongoose');
 const mongoose = require ('mongoose');
 const User = mongoose.model('User')
 
@@ -7,6 +6,12 @@ const registro = async (req,res)=>
     //CREAMOS NUESTRO USUARIO CON LO QUE VIENE DEL BODY
 
     const user = new User(req.body);
+    const {password} = req.body;
+
+    delete req.body.password;
+
+    user.hashPassword(password);
+
 
     const resp =await user.save();
 
