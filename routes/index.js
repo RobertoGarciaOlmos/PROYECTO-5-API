@@ -13,3 +13,4 @@ router.use('/user',userRouter)
 router.use('/cupcake',cupcakeRouter)
 
 module.exports = router;
+

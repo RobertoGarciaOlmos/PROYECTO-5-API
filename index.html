@@ -8,10 +8,11 @@
 </head>
 <body>
     
+    <form>
     <input type="texto" id="nombre"/>
      <input type="number" id="edad"/>
      <button tyoe="submit" onclick="guardar()">Guardar</button>
-    
+    </form>
 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
@@ -19,7 +20,7 @@
         const inputNombre = document.getElementById("nombre");
         const inputEdad = document.getElementById("edad");
         const guardar =() => {
-        axios.post('https://proyecto-5-jjsggsi4e-robertogarciaolmos.vercel.app/v1', {
+        axios.post('https://proyecto-5-api.vercel.app/v1/user', {
         nombre: inputNombre.value,
         edad: inputEdad.value,
     });
