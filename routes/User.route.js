@@ -7,8 +7,8 @@
  */
 
 //1.
-
 const express = require('express');
+const auth = require("../middleware/auth")
 
 //2.
 const router = express.Router();
@@ -20,13 +20,15 @@ const {
     verUsuario,
     filtrarUsuarios,
     eliminarUsuario,
-    actualizarUsuario 
+    actualizarUsuario,
+    login,
 } = require('../controllers');
 
 //4
 
 router.post('/',registro);
-router.get('/getAll',verUsuario);
+router.post('/login',login);
+router.get('/getAll',auth, verUsuario);
 router.get('/filtrar',filtrarUsuarios);
 router.delete('/:id',eliminarUsuario);
 router.put('/:id', actualizarUsuario);

@@ -1,24 +1,52 @@
 const mongoose = require ('mongoose');
 const User = mongoose.model('User')
 
+
 const registro = async (req,res)=>
 { try{
     //CREAMOS NUESTRO USUARIO CON LO QUE VIENE DEL BODY
-
-    const user = new User(req.body);
     const {password} = req.body;
 
     delete req.body.password;
 
+    const user = new User(req.body);
+
     user.hashPassword(password);
+ 
+    await user.save();
 
-
-    const resp =await user.save();
-
-    return res.status(201).json({mensaje: "Se creo usuario", datalles: resp});
+    return res.status(201).json({mensaje: "Se creo usuario", detalles: user.onSignGenerateJWT()});
 
 } catch(e){
-    return res.status(400).json({mensaje: "Error", datalles: e.message});
+    return res.status(400).json({mensaje: "Error!", datalles: e.message});
+
+}
+};
+
+const login = async (req,res)=>
+{ try{
+    //CREAMOS NUESTRO USUARIO CON LO QUE VIENE DEL BODY
+    const {correo, password} = req.body;
+
+    const user = await User.findOne ({correo});
+    
+    if(!user){
+        return res.status(404).json({mensaje: "Error", datalles: "Usuario no existe"});
+    }
+
+    if(user.verifyPassword(password)){
+        return res
+        .status(200)
+        .json({mensaje: "Login correcto", token: user.generateJWT()});
+    }
+
+    return res
+    .status(400)
+    .json({mensaje: "Error", detalles: "Verifica credenciales"});
+    }    
+    
+    catch(e){
+    return res.status(400).json({mensaje: "Error..", datalles: e.message});
 
 }
 }
@@ -26,6 +54,12 @@ const registro = async (req,res)=>
 
 const verUsuario = async (req, res)=>
 { try{
+    if (req.user.tipo !== "admin")
+    {return res
+        .status (400)
+        .json({mensaje: "Error", datalles: 'Acceso no atorizado'})
+    }
+
     const usuarios= await  User.find();
 if(!usuarios.length) 
 return res.status(404).json({mensaje: "Error", datalles: 'Collection vacia'})
@@ -85,6 +119,7 @@ module.exports={
     verUsuario,
 filtrarUsuarios,
 eliminarUsuario,
-actualizarUsuario 
+actualizarUsuario,
+login
 
     };

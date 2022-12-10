@@ -26,7 +26,7 @@ const routes = require('./routes');
 
 
 // 4
-const app = express();
+const app = express(); 
 
 //cors
 

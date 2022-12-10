@@ -10,11 +10,16 @@
 //! 1
 const mongoose = require ('mongoose');
 const crypto = require("crypto");
+const jwt = require("jsonwebtoken");
 
 
 //! 2
 const UserSchema= new mongoose.Schema({
     nombre:{
+        type: String,
+        require: true,
+    },
+    correo: {
         type: String,
         require: true,
     },
@@ -53,8 +58,30 @@ max: [100, `Ya estas muy viejo`]
 
 UserSchema.methods.hashPassword = function(password) {
     this.salt=crypto.randomBytes(16).toString("hex");
-    this.password = crypto.pbkdf2Sync(password, this.salt,1000,251,'sha512').toString('hex')
+    this.password = this.encryptString(password,this.salt)};
+
+UserSchema.methods.encryptString = function(stringToEncrypt,salt) {
+   return crypto
+    .pbkdf2Sync(stringToEncrypt, this.salt,1000,251,'sha512').toString('hex')
 };
+
+
+UserSchema.methods.verifyPassword= function(password)
+{return this.password === this.encryptString(password,this.salt);
+
+} 
+
+UserSchema.methods.generateJWT = function() {
+return jwt.sign({idUser: this._id, tipo: this.tipo}, process.env.secret)
+};
+
+UserSchema.methods.onSignGenerateJWT = function () {
+    return {
+        idUser: this._id,
+        tipo:this.tipo,
+        token: this.generateJWT(),
+    };
+}
 
 
 mongoose.model('User',UserSchema, 'coleccionUser');
