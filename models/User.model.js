@@ -11,6 +11,7 @@
 const mongoose = require ('mongoose');
 const crypto = require("crypto");
 const jwt = require("jsonwebtoken");
+const uniqueValidator= require("mongoose-unique-validator");
 
 
 //! 2
@@ -22,6 +23,8 @@ const UserSchema= new mongoose.Schema({
     correo: {
         type: String,
         require: true,
+        unique: true,
+        match:[/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/, "Email inválido"],
     },
     planeta: {
         type: String,
@@ -55,6 +58,8 @@ max: [100, `Ya estas muy viejo`]
 
 
 //! 3
+
+UserSchema.plugin(uniqueValidator);
 
 UserSchema.methods.hashPassword = function(password) {
     this.salt=crypto.randomBytes(16).toString("hex");

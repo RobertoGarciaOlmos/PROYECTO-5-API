@@ -10,7 +10,13 @@ const newCupcake = async (req,res)=>
 
     const resp =await cupcake.save();
 
-    return res.status(201).json({mensaje: "Se creo nuevo producto", datalles: resp});
+    return res.status(201).json({mensaje: "Se creo nuevo producto", datalles: await resp.populate({
+        path:"UsuarioCreador",
+        select:{
+            nombre:true
+        }
+
+    })});
 
 } catch(e){
     return res.status(400).json({mensaje: "Error", datalles: e.message});
@@ -21,7 +27,13 @@ const newCupcake = async (req,res)=>
 
 const verCupcake = async (req, res)=>
 { try{
-    const cupcakes= await  Cupcake.find();
+    const cupcakes= await  Cupcake.find().populate({
+        path:"UsuarioCreador",
+        select:{
+            nombre:true
+        }
+
+    });
 if(!cupcakes.length) 
 return res.status(404).json({mensaje: "Error", datalles: 'Collection vacia'})
 return res.status(200).json({mensaje: "Cupcakes / Productos encontrados", datalles: cupcakes})

@@ -22,12 +22,16 @@ const CupcakeSchema= new mongoose.Schema({
     costo:{
         type:Number,
         require: true,
-min: [0, `No puedes regalar el producto`],
+min: [0.1, `No puedes regalar el producto`],
     },
 
     Tamaño: {
         type: String,
         default:'M'
+    },
+    UsuarioCreador: {
+        type: mongoose.ObjectId,
+        ref:'User'
     },
     })
 
