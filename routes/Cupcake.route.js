@@ -9,6 +9,7 @@
 //1.
 
 const express = require('express');
+const auth = require("../middleware/auth")
 
 //2.
 const router = express.Router();
