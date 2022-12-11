@@ -29,9 +29,9 @@ const {
 router.post('/',registro);
 router.post('/login',login);
 router.get('/getAll',auth, verUsuario);
-router.get('/filtrar',filtrarUsuarios);
-router.delete('/:id',eliminarUsuario);
-router.put('/:id', actualizarUsuario);
+router.get('/filtrar',auth, filtrarUsuarios);
+router.delete('/:id',auth, eliminarUsuario);
+router.put('/:id',auth, actualizarUsuario);
 
 
 //5

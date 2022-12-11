@@ -24,10 +24,10 @@ const {
 
 //4
 
-router.post('/',newCupcake);
-router.get('/getAll',verCupcake);
-router.delete('/:id',eliminarCupcake);
-router.put('/:id', actualizarCupcake);
+router.post('/', auth, newCupcake);
+router.get('/getAll', auth, verCupcake);
+router.delete('/:id',auth, eliminarCupcake);
+router.put('/:id',auth, actualizarCupcake);
 
 
 //5
