@@ -20,7 +20,7 @@ const registro = async (req,res)=>
     return res.status(201).json({mensaje: "Se creo usuario", detalles: user.onSignGenerateJWT()});
 
 } catch(e){
-    return res.status(400).json({mensaje: "Error!", datalles: e.message});
+    return res.status(400).json({mensaje: "Error!", detalles: e.message});
 
 }
 };
@@ -33,7 +33,7 @@ const login = async (req,res)=>
     const user = await User.findOne ({correo});
     
     if(!user){
-        return res.status(404).json({mensaje: "Error", datalles: "Usuario no existe"});
+        return res.status(404).json({mensaje: "Error", detalles: "Usuario no existe"});
     }
 
     if(user.verifyPassword(password)){
@@ -48,7 +48,7 @@ const login = async (req,res)=>
     }    
     
     catch(e){
-    return res.status(400).json({mensaje: "Error..", datalles: e.message});
+    return res.status(400).json({mensaje: "Error..", detalles: e.message});
 
 }
 }
@@ -59,15 +59,15 @@ const verUsuario = async (req, res)=>
     if (req.user.tipo !== "admin")
     {return res
         .status (400)
-        .json({mensaje: "Error", datalles: 'Acceso no atorizado'})
+        .json({mensaje: "Error", detalles: 'Acceso no atorizado'})
     }
 
     const usuarios= await  User.find();
 if(!usuarios.length) 
-return res.status(404).json({mensaje: "Error", datalles: 'Collection vacia'})
-return res.status(200).json({mensaje: "Usurios encontrados", datalles: usuarios})
+return res.status(404).json({mensaje: "Error", detalles: 'Collection vacia'})
+return res.status(200).json({mensaje: "Usurios encontrados", detalles: usuarios})
 }
-catch(e){return res.status(400).json({mensaje: "Error", datalles: e.message});
+catch(e){return res.status(400).json({mensaje: "Error", detalles: e.message});
 }
 
 }
@@ -76,10 +76,10 @@ const filtrarUsuarios= async (req, res)=>
 { try{
     const usuarios= await  User.find(req.body);
 if(!usuarios.length) 
-return res.status(404).json({mensaje: "Error", datalles: 'No se encontro usuario'})
-return res.status(200).json({mensaje: "Usurios encontrados", datalles: usuarios})
+return res.status(404).json({mensaje: "Error", detalles: 'No se encontro usuario'})
+return res.status(200).json({mensaje: "Usurios encontrados", detalles: usuarios})
 }
-catch(e){return res.status(400).json({mensaje: "Error", datalles: e.message});
+catch(e){return res.status(400).json({mensaje: "Error", detalles: e.message});
 }
 
 }
@@ -89,14 +89,14 @@ const eliminarUsuario= async (req, res)=>
 { try{
     const{id}= req.params;
     if(!id)
-    return res.status(404).json({mensaje: "Error", datalles: 'Se necesita ID'})
+    return res.status(404).json({mensaje: "Error", detalles: 'Se necesita ID'})
     const usuario = await User.findById(id)
     if(!usuario) 
-    return res.status(404).json({mensaje: "Error", datalles: 'No se encontro usuario'})
+    return res.status(404).json({mensaje: "Error", detalles: 'No se encontro usuario'})
     const eliminado= await  User.findOneAndDelete(id);
-    return res.status(200).json({mensaje: "Usurios eliminado", datalles: eliminado})
+    return res.status(200).json({mensaje: "Usurios eliminado", detalles: eliminado})
 }
-catch(e){return res.status(400).json({mensaje: "Error", datalles: e.message});
+catch(e){return res.status(400).json({mensaje: "Error", detalles: e.message});
 }
 };
 
@@ -105,11 +105,11 @@ const actualizarUsuario = async (req,res) => {
     try{
 const {id} =req.params;
 const actualizado =await User.findByIdAndUpdate(id, {$set: req.body},{new:true});
-return res.status(200).json({mensaje: "Atualizado", datalles: actualizado})
+return res.status(200).json({mensaje: "Atualizado", detalles: actualizado})
 
 }catch(e){
 
-    return res.status(404).json({mensaje: "Error", datalles: e.message})
+    return res.status(404).json({mensaje: "Error", detalles: e.message})
 }
 
 }

@@ -8,7 +8,7 @@ const newCupcake = async (req,res)=>
         return res
         .status(403)
         .json({mensaje: "Error", 
-        datalles: 'No cuenta con permisos para esta acción'
+        detalles: 'No cuenta con permisos para esta acción'
     });
     }
 
@@ -21,7 +21,7 @@ const newCupcake = async (req,res)=>
 
     const resp =await cupcake.save();
 
-    return res.status(201).json({mensaje: "Se creo nuevo producto", datalles: await resp.populate({
+    return res.status(201).json({mensaje: "Se creo nuevo producto", detalles: await resp.populate({
         path:"UsuarioCreador",
         select:{
             nombre:true
@@ -30,7 +30,7 @@ const newCupcake = async (req,res)=>
     })});
 
 } catch(e){
-    return res.status(400).json({mensaje: "Error", datalles: e.message});
+    return res.status(400).json({mensaje: "Error", detalles: e.message});
 
 }
 }
@@ -46,10 +46,10 @@ const verCupcake = async (req, res)=>
 
     });
 if(!cupcakes.length) 
-return res.status(404).json({mensaje: "Error", datalles: 'Collection vacia'})
-return res.status(200).json({mensaje: "Cupcakes / Productos encontrados", datalles: cupcakes})
+return res.status(404).json({mensaje: "Error", detalles: 'Collection vacia'})
+return res.status(200).json({mensaje: "Cupcakes / Productos encontrados", detalles: cupcakes})
 }
-catch(e){return res.status(400).json({mensaje: "Error", datalles: e.message});
+catch(e){return res.status(400).json({mensaje: "Error", detalles: e.message});
 }
 
 }
@@ -58,10 +58,10 @@ catch(e){return res.status(400).json({mensaje: "Error", datalles: e.message});
 // { try{
 //     const Cupcakes= await  Cupcake.find(req.body);
 // if(!Cupcakes.length) 
-// return res.status(404).json({mensaje: "Error", datalles: 'No se encontro Cupcake / Producto'})
-// return res.status(200).json({mensaje: "Cupcakes encontrados / Producto", datalles: usuarios})
+// return res.status(404).json({mensaje: "Error", detalles: 'No se encontro Cupcake / Producto'})
+// return res.status(200).json({mensaje: "Cupcakes encontrados / Producto", detalles: usuarios})
 // }
-// catch(e){return res.status(400).json({mensaje: "Error", datalles: e.message});
+// catch(e){return res.status(400).json({mensaje: "Error", detalles: e.message});
 // }
 
 // }
@@ -71,14 +71,14 @@ const eliminarCupcake= async (req, res)=>
 { try{
     const{id}= req.params;
     if(!id)
-    return res.status(404).json({mensaje: "Error", datalles: 'Se necesita ID'})
+    return res.status(404).json({mensaje: "Error", detalles: 'Se necesita ID'})
     const cupcake = await Cupcake.findById(id)
     if(!cupcake) 
-    return res.status(404).json({mensaje: "Error", datalles: 'No se encontro Cupcake / Producto'})
+    return res.status(404).json({mensaje: "Error", detalles: 'No se encontro Cupcake / Producto'})
     const eliminado= await  Cupcake.findOneAndDelete(id);
-    return res.status(200).json({mensaje: "Cupcake / Producto eliminado", datalles: eliminado})
+    return res.status(200).json({mensaje: "Cupcake / Producto eliminado", detalles: eliminado})
 }
-catch(e){return res.status(400).json({mensaje: "Error", datalles: e.message});
+catch(e){return res.status(400).json({mensaje: "Error", detalles: e.message});
 }
 };
 
@@ -87,11 +87,11 @@ const actualizarCupcake = async (req,res) => {
     try{
 const {id} =req.params;
 const actualizado =await Cupcake.findByIdAndUpdate(id, {$set: req.body},{new:true});
-return res.status(200).json({mensaje: "Atualizado", datalles: actualizado})
+return res.status(200).json({mensaje: "Atualizado", detalles: actualizado})
 
 }catch(e){
 
-    return res.status(404).json({mensaje: "Error", datalles: e.message})
+    return res.status(404).json({mensaje: "Error", detalles: e.message})
 }
 
 }
