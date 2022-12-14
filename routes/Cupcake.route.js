@@ -25,8 +25,8 @@ const {
 
 //4
 
-router.post('/', auth, newCupcake);
-router.get('/getAll', auth, verCupcake);
+router.post('/', newCupcake);
+router.get('/getAll', verCupcake);
 router.delete('/:id',auth, eliminarCupcake);
 router.put('/:id',auth, actualizarCupcake);
 
