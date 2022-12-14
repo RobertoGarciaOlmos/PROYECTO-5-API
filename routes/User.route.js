@@ -22,6 +22,7 @@ const {
     eliminarUsuario,
     actualizarUsuario,
     login,
+    verInfoUsuario,
 } = require('../controllers');
 
 //4
@@ -32,6 +33,7 @@ router.get('/getAll',auth, verUsuario);
 router.get('/filtrar',auth, filtrarUsuarios);
 router.delete('/:id',auth, eliminarUsuario);
 router.put('/:id',auth, actualizarUsuario);
+router.get('/',auth, verInfoUsuario);
 
 
 //5

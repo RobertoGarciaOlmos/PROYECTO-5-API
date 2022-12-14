@@ -87,7 +87,7 @@ UserSchema.methods.verifyPassword= function(password)
 } 
 
 UserSchema.methods.generateJWT = function() {
-return jwt.sign({idUser: this._id, tipo: this.tipo}, process.env.secret)
+return jwt.sign({idUser: this._id, tipo: this.tipo}, process.env.SECRET)
 };
 
 UserSchema.methods.onSignGenerateJWT = function () {
