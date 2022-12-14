@@ -3,6 +3,8 @@ const User = mongoose.model('User')
 
 
 const registro = async (req,res)=>
+
+
 { try{
     //CREAMOS NUESTRO USUARIO CON LO QUE VIENE DEL BODY
     const {password} = req.body;

@@ -1,9 +1,20 @@
-const { Collection } = require('mongoose');
+
 const mongoose = require ('mongoose');
 const Cupcake = mongoose.model('Cupcake')
 
 const newCupcake = async (req,res)=>
 { try{
+    if (req.user.tipo !== "admin") {
+        return res
+        .status(403)
+        .json({mensaje: "Error", 
+        datalles: 'No cuenta con permisos para esta acción'
+    });
+    }
+
+
+
+
     //CREAMOS NUESTRO USUARIO CON LO QUE VIENE DEL BODY
 
     const cupcake = new Cupcake(req.body);
