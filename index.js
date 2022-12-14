@@ -19,10 +19,8 @@ require ('./models')
 //3
 const express= require ('express');
 const mongoose= require ('mongoose');
-const cors = require ("cors");
+const cors = require("cors");
 const routes = require('./routes');
-
-
 
 
 // 4
@@ -32,9 +30,10 @@ const app = express();
 
 app.use(cors());
 
+
+
 // 5
 app.use(express.json());
-
 
 
 // 6
