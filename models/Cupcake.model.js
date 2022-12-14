@@ -25,6 +25,10 @@ const CupcakeSchema= new mongoose.Schema({
 min: [0.1, `No puedes regalar el producto`],
     },
 
+    img:{
+        type:String
+    },
+
     Tamaño: {
         type: String,
         default:'M'

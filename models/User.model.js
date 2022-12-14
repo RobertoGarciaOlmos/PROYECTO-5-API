@@ -16,9 +16,19 @@ const uniqueValidator= require("mongoose-unique-validator");
 
 //! 2
 const UserSchema= new mongoose.Schema({
+    img: {
+        type:String,
+        default:"https://cdna.artstation.com/p/assets/images/images/025/955/196/large/aaron-roberts-kimmy-cakes-2.jpg?1587450411"
+    },
+
+
     nombre:{
         type: String,
         require: true,
+    },
+
+    apellido:{
+        type:String,
     },
     correo: {
         type: String,
