@@ -29,11 +29,11 @@ const {
 
 router.post('/',registro);
 router.post('/login',login);
-router.get('/getAll',  verUsuario);
+router.get('/getAll', auth, verUsuario);
 router.get('/filtrar',auth, filtrarUsuarios);
 router.delete('/:id',auth, eliminarUsuario);
 router.put('/:id',auth, actualizarUsuario);
-router.get('/', verInfoUsuario);
+router.get('/',auth, verInfoUsuario);
 
 
 //5
